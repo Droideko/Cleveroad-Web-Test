@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './app-location.sass';
+import MapContainer from '../map-app/map-app';
 
 class AppLocation extends Component {
    constructor(props){
@@ -31,6 +32,12 @@ class AppLocation extends Component {
    render(){
       const { coordinate, isLoaded, error } = this.state;
 
+      let latitude, longitude;
+      if (isLoaded) {
+         latitude = coordinate.iss_position.latitude;
+         longitude = coordinate.iss_position.longitude;
+      }
+
       if (error) {
          return <h3> Error: {error.name} </h3>
       } else if (!isLoaded){
@@ -46,7 +53,9 @@ class AppLocation extends Component {
                   <p>ISS is now located at:</p>
                   <p>longitude: {coordinate.iss_position.longitude}, latitude: {coordinate.iss_position.latitude}</p>
                </div>
-               <div>Map</div>   
+               <div className='container-location__map'>
+                  <MapContainer lat={latitude} lng={longitude} /> 
+               </div>
             </div>
          );
       }

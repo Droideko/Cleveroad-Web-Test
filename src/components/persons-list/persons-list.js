@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import './persons-list.sass';
+import userImage from '../../../image/svg/user.svg';
 
 class PersonsList extends Component {
    constructor(props){
@@ -27,13 +29,18 @@ class PersonsList extends Component {
          return <div> Loading... </div>
       } else {
          return (
-            <div>
-               <ul>
+            <div className='list-wrapper'>
+               <ul className='list'>
                   {data.people.map((el, i) => {
-                     return <li key={i}>{el.name}</li>
+                     return <li key={i} className='list-item'>
+                        <div className='list-block'>
+                           <img src={userImage} alt='user'/>
+                           <p>{el.name}</p>                    
+                        </div> 
+                     </li>
                   })}               
                </ul>
-               <p>Total amount: {data.number} people on ISS</p>
+               <p className='list-amount'>Total amount: {data.number} people on ISS</p>
             </div>
          )
       }     
