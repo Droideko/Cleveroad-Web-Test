@@ -13,12 +13,13 @@ class AppLocation extends Component {
    }
 
    componentDidMount(){
-      this.getData();
-      this.intervalID = setInterval(this.getData.bind(this), 5000);      
+      this.getData(); 
    }
 
-   componentWillUnmount(){
-      clearInterval(this.intervalID);
+   componentDidUpdate(prevPros){
+      if (this.props.date !== prevPros.date){
+         this.getData();
+      }
    }
 
    getData = () => {
@@ -28,7 +29,6 @@ class AppLocation extends Component {
          .catch(e => this.setState({coordinate: result, isLoaded: true, error: e}));
    }
    
-
    render(){
       const { coordinate, isLoaded, error } = this.state;
 
@@ -37,7 +37,6 @@ class AppLocation extends Component {
          latitude = coordinate.iss_position.latitude;
          longitude = coordinate.iss_position.longitude;
       }
-
       if (error) {
          return <h3> Error: {error.name} </h3>
       } else if (!isLoaded){
