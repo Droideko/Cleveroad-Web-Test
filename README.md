@@ -10,7 +10,7 @@ npm install
 ## Usage
 
 ```bash
-npm start
+npm run start
 ```
 
 ## Compiles and hot-reloads for development
